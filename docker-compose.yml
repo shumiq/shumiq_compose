@@ -1,0 +1,29 @@
+version: "3.8"
+
+services:
+  anime:
+    container_name: shumiq-anime
+    image: docker-registry.shumiq.synology.me/shumiq_anime:latest
+    restart: unless-stopped
+    ports:
+      - ${ANIME_PORT}:3000
+
+  api:
+    container_name: shumiq-api
+    image: docker-registry.shumiq.synology.me/shumiq_api:latest
+    restart: unless-stopped
+    ports:
+      - ${API_PORT}:5000
+    environment:
+      FIREBASE_ADMIN_UID: ${FIREBASE_ADMIN_UID}
+      GOOGLE_APPLICATION_PRIVATE_KEY: ${GOOGLE_APPLICATION_PRIVATE_KEY}
+      REACT_APP_HOST: ${REACT_APP_HOST}
+      SYNOLOGY_API_GUEST_USERNAME: ${SYNOLOGY_API_GUEST_USERNAME}
+      SYNOLOGY_API_GUEST_PASSWORD: ${SYNOLOGY_API_GUEST_PASSWORD}
+      SYNOLOGY_API_ADMIN_USERNAME: ${SYNOLOGY_API_ADMIN_USERNAME}
+      SYNOLOGY_API_ADMIN_PASSWORD: ${SYNOLOGY_API_ADMIN_PASSWORD}
+      REACT_APP_VIDEO_PATH: ${REACT_APP_VIDEO_PATH}
+      REACT_APP_PHOTO_PATH: ${REACT_APP_PHOTO_PATH}
+    volumes:
+      - ${VIDEO_PATH}:${REACT_APP_VIDEO_PATH}
+      - ${PHOTO_PATH}:${REACT_APP_PHOTO_PATH}
