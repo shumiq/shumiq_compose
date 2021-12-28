@@ -32,3 +32,10 @@ services:
     volumes:
       - ${VIDEO_PATH}:${REACT_APP_VIDEO_PATH}
       - ${PHOTO_PATH}:${REACT_APP_PHOTO_PATH}
+
+  apps:
+    container_name: shumiq-apps
+    image: docker-registry.shumiq.synology.me/shumiq_apps:latest
+    restart: unless-stopped
+    ports:
+      - ${APPS_PORT}:3000
