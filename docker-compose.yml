@@ -27,16 +27,20 @@ services:
       PGDATABASE: ${PGDATABASE}
       PGPASSWORD: ${PGPASSWORD}
       PGPORT: ${PGPORT}
-      REACT_APP_VIDEO_PATH: ${REACT_APP_VIDEO_PATH}
-      REACT_APP_PHOTO_PATH: ${REACT_APP_PHOTO_PATH}
+      REACT_APP_VIDEO_PATH: ${DOCKER_VIDEO_PATH}
+      REACT_APP_PHOTO_PATH: ${DOCKER_PHOTO_PATH}
       APPS_APK_PATH: ${APPS_APK_PATH}
     volumes:
-      - ${VIDEO_PATH}:${REACT_APP_VIDEO_PATH}
-      - ${PHOTO_PATH}:${REACT_APP_PHOTO_PATH}
+      - ${VIDEO_PATH}:${DOCKER_VIDEO_PATH}
+      - ${PHOTO_PATH}:${DOCKER_PHOTO_PATH}
 
   apps:
-    container_name: shumiq-apps
-    image: docker-registry.shumiq.synology.me/shumiq_apps:latest
+    container_name: shumiq-apps-react
+    image: docker-registry.shumiq.synology.me/shumiq_apps_react:latest
     restart: unless-stopped
     ports:
       - ${APPS_PORT}:3000
+    environment:
+      VIDEO_PATH: ${DOCKER_VIDEO_PATH}
+    volumes:
+      - ${VIDEO_PATH}:${DOCKER_VIDEO_PATH}
