@@ -21,6 +21,7 @@ services:
       PGPORT: ${PGPORT}
       PHOTO_PATH: ${DOCKER_PHOTO_PATH}
       VIDEO_PATH: ${DOCKER_VIDEO_PATH}
+      TZ: ${TIME_ZONE}
     volumes:
       - ${VIDEO_PATH}:${DOCKER_VIDEO_PATH}
       - ${PHOTO_PATH}:${DOCKER_PHOTO_PATH}
